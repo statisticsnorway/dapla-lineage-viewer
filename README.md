@@ -32,7 +32,7 @@ The component requires a few peer dependencies to work, namely:
 
 In your application import the component.
 
-`import { LineageViewer } from '@statisticsnorway/dapla-lineage-viwer'`
+`import { LineageViewer } from '@statisticsnorway/dapla-lineage-viewer'`
 
 The component needs two properties to function correctly, `restApi` and `language`.
 

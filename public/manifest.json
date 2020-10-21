@@ -1,6 +1,6 @@
 {
-  "short_name": "Dataplatform Lineage Viewer",
-  "name": "Dataplatform Lineage Viewer",
+  "short_name": "Lineage Viewer",
+  "name": "Lineage Viewer",
   "icons": [
     {
       "src": "favicon.ico",
