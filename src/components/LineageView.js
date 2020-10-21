@@ -59,7 +59,7 @@ function LineageView ({ language, variableId, variableType }) {
               <Segment>
                 <Grid>
                   {[4, 2, 0, 3].map(thing =>
-                    <Grid.Row style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem' }}>
+                    <Grid.Row key={thing} style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem' }}>
                       <Grid.Column width={2}>
                         <svg width='30' height='30' version='1.1' xmlns='http://www.w3.org/2000/svg'>
                           <path

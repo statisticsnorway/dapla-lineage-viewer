@@ -23,8 +23,10 @@ function AppHome ({ restApi, language }) {
       const id = urlParams.get('id')
       const type = urlParams.get('type')
 
-      setVariableId(id)
-      setVariableType(type)
+      if (id && type !== null) {
+        setVariableId(id)
+        setVariableType(type)
+      }
     } else {
       setApiReady(false)
     }
