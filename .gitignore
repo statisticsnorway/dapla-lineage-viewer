@@ -9,4 +9,5 @@
 
 # misc
 /.idea
+/public/env.js
 *.tgz

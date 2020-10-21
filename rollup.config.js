@@ -1,9 +1,16 @@
+import path from "path"
 import babel from '@rollup/plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
 
 const globals = {
+  '@statisticsnorway/dapla-js-utilities': 'daplaJsUtilities',
+  'axios-hooks': 'useAxios',
+  'react-d3-graph': 'reactD3Graph',
+  'd3-shape': 'd3Shape',
+  'color-hash': 'ColorHash',
+  'graphql-hooks': 'graphqlHooks',
   react: 'React',
   'semantic-ui-react': 'semanticUiReact'
 }
@@ -25,8 +32,17 @@ export default {
     }
   ],
   external: [
+    '@statisticsnorway/dapla-js-utilities',
+    'axios',
+    'axios-hooks',
+    'color-hash',
+    'd3',
+    'd3-shape',
+    'graphql-hooks',
     'react',
-    'semantic-ui-react'
+    'react-d3-graph',
+    'semantic-ui-react',
+    path.resolve(__dirname, 'src/configurations/TEST.js')
   ],
   plugins: [
     resolve(),
