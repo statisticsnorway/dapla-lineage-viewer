@@ -1,6 +1,6 @@
 # dapla-lineage-viewer
 [![npm version](https://badge.fury.io/js/%40statisticsnorway%2Fdapla-lineage-viewer.svg)](https://badge.fury.io/js/%40statisticsnorway%2Fdapla-lineage-viewer)
-[![Build Status](https://dev.azure.com/statisticsnorway/Dapla/_apis/build/status/Frontends/statisticsnorway.dapla-lineage-viewer?branchName=master)](https://dev.azure.com/statisticsnorway/Dapla/_build/latest?definitionId=12&branchName=master)
+[![Build Status](https://dev.azure.com/statisticsnorway/Dapla/_apis/build/status/Frontends/statisticsnorway.dapla-lineage-viewer?repoName=statisticsnorway%2Fdapla-lineage-viewer&branchName=master)](https://dev.azure.com/statisticsnorway/Dapla/_build/latest?definitionId=118&repoName=statisticsnorway%2Fdapla-lineage-viewer&branchName=master)
 
 This application is built for in-house use in Statistics Norway and it aims to create a smart and interactive lineage
 viewer for variables and datasets with the help of the 
@@ -22,8 +22,12 @@ The component requires a few peer dependencies to work, namely:
 
 * @statisticsnorway/dapla-js-utilities
 * axios-hooks
+* color-hash
+* d3
+* d3-shape
 * graphql-hooks
 * React
+* react-d3-graph
 * SemanticUI
 
 In your application import the component.
