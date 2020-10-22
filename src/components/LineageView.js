@@ -6,19 +6,21 @@ import { Grid, Header, Rail, Segment } from 'semantic-ui-react'
 import { getLocalizedGsimObjectText, SSB_COLORS } from '@statisticsnorway/dapla-js-utilities'
 import ColorHash from 'color-hash'
 
-import { DATASETS_FROM_LINEAGE } from '../queries'
-import { nodeGraphFromVariable, variableSymbols } from '../utilities'
+import { DATASETS_FROM_LINEAGE, VARIABLES_FROM_LINEAGE } from '../queries'
+import { nodeGraphFromDataset, nodeGraphFromVariable, variableSymbols } from '../utilities'
 import { GRAPH_CONFIG, GSIM } from '../configurations'
 import { UI } from '../enums'
 
 const hash = new ColorHash({ lightness: [0.35, 0.5, 0.65] })
 
-function LineageView ({ language, variableId, variableType }) {
+function LineageView ({ dataId, dataType, language }) {
   const [nodes, setNodes] = useState(false)
   const [clickedNode, setClickedNode] = useState('')
   const [graphConfig] = useState(GRAPH_CONFIG(window.screen.width))
 
-  const [fetchResults, { loading, error, data }] = useManualQuery(DATASETS_FROM_LINEAGE(variableType), { variables: { id: variableId } })
+  const [fetchResults, { loading, error, data }] = useManualQuery(dataType !== 'dataset' ?
+    DATASETS_FROM_LINEAGE(dataType) : VARIABLES_FROM_LINEAGE, { variables: { id: dataId } }
+  )
 
   useEffect(() => {
     fetchResults().then(() => null)
@@ -26,36 +28,58 @@ function LineageView ({ language, variableId, variableType }) {
 
   useEffect(() => {
     if (!loading && !error && data !== undefined) {
-      const nodesFrom = nodeGraphFromVariable(variableId, data, variableType, language)
+      if (dataType !== 'dataset') {
+        const nodesFrom = nodeGraphFromVariable(dataId, data, dataType, language)
 
-      const graphNodes = {
-        nodes: nodesFrom.nodes.concat([{
-          id: variableId,
-          nodeLabelName: getLocalizedGsimObjectText(language, data[0][variableType][GSIM.NAME]),
-          color: hash.hex(variableId),
-          size: 600,
-          fontSize: 20,
-          highlightFontSize: 20,
-          symbolType: variableSymbols[variableType]
-        }]).filter((node, index, a) => a.findIndex(t => (t.id === node.id)) === index),
-        links: nodesFrom.links
+        const graphNodes = {
+          nodes: nodesFrom.nodes.concat([{
+            id: dataId,
+            nodeLabelName: getLocalizedGsimObjectText(language, data[0][dataType][GSIM.NAME]),
+            color: hash.hex(dataId),
+            size: 1000,
+            fontSize: 20,
+            highlightFontSize: 20,
+            symbolType: variableSymbols[dataType]
+          }]).filter((node, index, a) => a.findIndex(t => (t.id === node.id)) === index),
+          links: nodesFrom.links
+        }
+
+        setNodes(graphNodes)
+      } else {
+        console.log(data)
+
+        const nodesFrom = nodeGraphFromDataset(dataId, data, language)
+
+        const graphNodes = {
+          nodes: nodesFrom.nodes.concat([{
+            id: dataId,
+            nodeLabelName: getLocalizedGsimObjectText(language, data[0].unitDataSet.name),
+            color: hash.hex(dataId),
+            size: 1000,
+            fontSize: 20,
+            highlightFontSize: 20,
+            symbolType: variableSymbols.dataset
+          }]).filter((node, index, a) => a.findIndex(t => (t.id === node.id)) === index),
+          links: nodesFrom.links
+        }
+
+        setNodes(graphNodes)
+        console.log(nodesFrom)
       }
-
-      setNodes(graphNodes)
     }
-  }, [loading, error, data, variableId, variableType, language])
+  }, [loading, error, data, dataId, dataType, language])
 
   const onClickNode = nodeId => setClickedNode(nodeId)
 
   return (
     <>
-      <Header content={`Sporing av ${variableId}`} />
+      <Header content={`Sporing av ${dataId} (${dataType})`} />
       {nodes &&
       <Grid>
         <Grid.Column width={12}>
           <Segment raised>
             <Graph id='graph-id' data={nodes} config={graphConfig} onClickNode={onClickNode} />
-            <Rail attached internal position='right'>
+            <Rail attached internal position='right' style={{ height: '30%' }}>
               <Segment>
                 <Grid>
                   {[4, 2, 0, 3].map(thing =>

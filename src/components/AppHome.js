@@ -9,8 +9,8 @@ import { UI } from '../enums'
 
 function AppHome ({ restApi, language }) {
   const [apiReady, setApiReady] = useState(false)
-  const [variableId, setVariableId] = useState('Variable_DUMMY')
-  const [variableType, setVariableType] = useState(MODEL.VARIABLE_TYPES[2])
+  const [dataId, setDataId] = useState('Variable_DUMMY')
+  const [dataType, setDataType] = useState(MODEL.VARIABLE_TYPES[2])
 
   const [{ loading, error }] = useAxios(`${restApi}${API.GET_HEALTH}`, { useCache: false })
 
@@ -24,8 +24,8 @@ function AppHome ({ restApi, language }) {
       const type = urlParams.get('type')
 
       if (id && type !== null) {
-        setVariableId(id)
-        setVariableType(type)
+        setDataId(id)
+        setDataType(type)
       }
     } else {
       setApiReady(false)
@@ -38,23 +38,23 @@ function AppHome ({ restApi, language }) {
         <Grid.Column width={3}>
           <Input
             fluid
-            value={variableId}
+            value={dataId}
             onFocus={(e) => e.target.select()}
             onKeyPress={({ key }) => key === 'Enter' && setApiReady(true)}
             onChange={(e, { value }) => {
               setApiReady(false)
-              setVariableId(value)
+              setDataId(value)
             }}
           />
         </Grid.Column>
         <Grid.Column width={13}>
           <Dropdown
             selection
-            value={variableType}
-            options={MODEL.VARIABLE_TYPES.map(type => ({ key: type, text: type, value: type }))}
+            value={dataType}
+            options={MODEL.VARIABLE_TYPES.map(type => ({ key: type, text: type, value: type })).concat([{ key: 'dataset', text: 'dataset', value: 'dataset'}])}
             onChange={(e, { value }) => {
               setApiReady(false)
-              setVariableType(value)
+              setDataType(value)
             }}
           />
         </Grid.Column>
@@ -64,7 +64,7 @@ function AppHome ({ restApi, language }) {
       {loading ? <Loader active inline='centered' /> :
         error ? <ErrorMessage error={UI.API_ERROR_MESSAGE[language]} language={language} /> :
           apiReady &&
-          <LineageView language={language} variableId={variableId} variableType={variableType} />
+          <LineageView dataId={dataId} dataType={dataType} language={language} />
       }
     </>
   )

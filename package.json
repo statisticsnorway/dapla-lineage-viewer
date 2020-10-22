@@ -1,6 +1,6 @@
 {
   "name": "@statisticsnorway/dapla-lineage-viewer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Lineage viewer for Statistics Norway Dataplatform",
   "main": "lib/bundle.js",
   "repository": {

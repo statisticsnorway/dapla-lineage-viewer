@@ -11,6 +11,7 @@ export const GSIM = {
 }
 
 export const MODEL = {
+  DATA_TYPE: ['variable', 'dataset'],
   DATASET_TYPES: ['unitDataSet'],
   VARIABLE_TYPES: ['instanceVariable', 'representedVariable', 'variable'],
   SMART: ['smart'],

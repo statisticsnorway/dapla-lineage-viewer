@@ -146,3 +146,61 @@ const fromVariableType = {
 }
 
 export const DATASETS_FROM_LINEAGE = variableType => fromVariableType[variableType]
+
+export const VARIABLES_FROM_LINEAGE = `
+  {
+    unitDataSet(filter: {id: $id}) {
+      id
+      name {
+        languageCode
+        languageText
+      }
+      description {
+        languageCode
+        languageText
+      }
+      lineage {
+        id
+        reverseLineageFieldLineageDataset {
+          id
+          smart {
+            id
+            instanceVariable {
+              id
+              name {
+                languageText
+                languageCode
+              }
+              description {
+                languageCode
+                languageText
+              }
+              representedVariable {
+                id
+                name {
+                  languageCode
+                  languageText
+                }
+                description {
+                  languageCode
+                  languageText
+                }
+                variable {
+                  id
+                  name {
+                    languageCode
+                    languageText
+                  }
+                  description {
+                    languageCode
+                    languageText
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`

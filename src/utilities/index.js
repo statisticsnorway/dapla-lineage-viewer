@@ -1,1 +1,1 @@
-export { nodeGraphFromVariable, variableSymbols } from './ResultHandling'
+export { nodeGraphFromDataset, nodeGraphFromVariable, variableSymbols } from './ResultHandling'
