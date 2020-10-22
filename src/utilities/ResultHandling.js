@@ -12,6 +12,74 @@ export const variableSymbols = {
   variable: 'star'
 }
 
+export const nodeGraphFromDataset = (id, data, language) => data.reduce((acc, cur) => {
+  const lineage = { nodes: [], links: [] }
+
+  const lineageFields = getNestedObject(cur, ['unitDataSet', 'lineage', 'reverseLineageFieldLineageDataset'])
+
+  if (lineageFields !== undefined) {
+    if (lineageFields.length !== 0) {
+      lineageFields.forEach(smart => {
+        smart.smart.forEach(smart => {
+          if (smart !== null) {
+            if (smart.hasOwnProperty('instanceVariable') && smart.instanceVariable !== null) {
+              lineage.nodes.push({
+                id: smart.instanceVariable.id,
+                nodeLabelName: getLocalizedGsimObjectText(language, smart.instanceVariable.name),
+                color: hash.hex(smart.instanceVariable.id),
+                symbolType: variableSymbols.instanceVariable
+              })
+              lineage.links.push({
+                source: id,
+                target: smart.instanceVariable.id
+              })
+
+              if (smart.instanceVariable.hasOwnProperty('representedVariable')) {
+                lineage.nodes.push({
+                  id: smart.instanceVariable.representedVariable.id,
+                  nodeLabelName: getLocalizedGsimObjectText(language, smart.instanceVariable.representedVariable.name),
+                  color: hash.hex(smart.instanceVariable.representedVariable.id),
+                  symbolType: variableSymbols.representedVariable
+                })
+                lineage.links.push({
+                  source: smart.instanceVariable.id,
+                  target: smart.instanceVariable.representedVariable.id
+                })
+
+                if (smart.instanceVariable.representedVariable.hasOwnProperty('variable')) {
+                  lineage.nodes.push({
+                    id: smart.instanceVariable.representedVariable.variable.id,
+                    nodeLabelName: getLocalizedGsimObjectText(language, smart.instanceVariable.representedVariable.variable.name),
+                    color: hash.hex(smart.instanceVariable.representedVariable.variable.id),
+                    symbolType: variableSymbols.variable
+                  })
+                  lineage.links.push({
+                    source: smart.instanceVariable.representedVariable.id,
+                    target: smart.instanceVariable.representedVariable.variable.id
+                  })
+                }
+              }
+            } else {
+              lineage.nodes.push({
+                id: smart.id,
+                nodeLabelName: getLocalizedGsimObjectText(language, smart.name),
+                color: hash.hex(smart.id),
+                symbolType: variableSymbols.instanceVariable
+              })
+              lineage.links.push({
+                source: id,
+                target: smart.id
+              })
+            }
+          }
+        })
+      })
+    }
+  }
+
+  return lineage
+}, {})
+
 export const nodeGraphFromVariable = (id, data, type, language) => data.reduce((acc, cur) => {
   const lineage = { nodes: [], links: [] }
 
