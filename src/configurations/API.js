@@ -7,7 +7,9 @@ export const GSIM = {
   INSTANCE_VARIABLE: 'instanceVariable',
   REPRESENTED_VARIABLE: 'representedVariable',
   VARIABLE: 'variable',
-  NAME: 'name'
+  NAME: 'name',
+  DESCRIPTION: 'description',
+  UNIT_DATA_SET: 'unitDataSet'
 }
 
 export const MODEL = {
@@ -15,7 +17,8 @@ export const MODEL = {
   DATASET_TYPES: ['unitDataSet'],
   VARIABLE_TYPES: ['instanceVariable', 'representedVariable', 'variable'],
   SMART: ['smart'],
-  UNIT_DATA_SET: ['lineageDataset', 'reverseUnitDataSetLineage']
+  UNIT_DATA_SET: ['lineageDataset', 'reverseUnitDataSetLineage'],
+  LINEAGE_FIELDS: ['unitDataSet', 'lineage', 'reverseLineageFieldLineageDataset']
 }
 
 export const QUERY_HELPERS = {

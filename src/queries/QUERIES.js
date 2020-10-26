@@ -7,10 +7,42 @@ const fromVariableType = {
           languageCode
           languageText
         }
+        description {
+          languageCode
+          languageText
+        }
+        representedVariable {
+          id
+          name {
+            languageCode
+            languageText
+          }
+          description {
+            languageCode
+            languageText
+          }
+          variable {
+            id
+            name {
+              languageCode
+              languageText
+            }
+            description {
+              languageCode
+              languageText
+            }
+          }
+        }
         reverseLineageFieldInstanceVariable {
           id
+          name
+          smartGraph {
+            fromId
+            toId
+          }
           smart {
             id
+            name
             lineageDataset {
               id
               reverseUnitDataSetLineage {
@@ -48,16 +80,41 @@ const fromVariableType = {
           languageCode
           languageText
         }
+        description {
+          languageCode
+          languageText
+        }
+        variable {
+          id
+          name {
+            languageCode
+            languageText
+          }
+          description {
+            languageCode
+            languageText
+          }
+        }
         reverseInstanceVariableRepresentedVariable {
           id
           name {
             languageText
             languageCode
           }
+          description {
+            languageCode
+            languageText
+          }
           reverseLineageFieldInstanceVariable {
             id
+            name
+            smartGraph {
+              fromId
+              toId
+            }
             smart {
               id
+              name
               lineageDataset {
                 id
                 reverseUnitDataSetLineage {
@@ -96,11 +153,19 @@ const fromVariableType = {
           languageCode
           languageText
         }
+        description {
+          languageCode
+          languageText
+        }
         reverseRepresentedVariableVariable {
           id
           name {
             languageText
             languageCode
+          }
+          description {
+            languageCode
+            languageText
           }
           reverseInstanceVariableRepresentedVariable {
             id
@@ -108,10 +173,20 @@ const fromVariableType = {
               languageText
               languageCode
             }
+            description {
+              languageCode
+              languageText
+            }
             reverseLineageFieldInstanceVariable {
               id
+              name
+              smartGraph {
+                fromId
+                toId
+              }
               smart {
                 id
+                name
                 lineageDataset {
                   id
                   reverseUnitDataSetLineage {
@@ -163,18 +238,29 @@ export const VARIABLES_FROM_LINEAGE = `
         id
         reverseLineageFieldLineageDataset {
           id
+          name
+          smartGraph {
+            fromId
+            toId
+          }
           smart {
             id
+            name
+            lineageDataset {
+              reverseUnitDataSetLineage {
+                id
+                name {
+                  languageCode
+                  languageText
+                }
+                description {
+                  languageCode
+                  languageText
+                }
+              }
+            }
             instanceVariable {
               id
-              name {
-                languageText
-                languageCode
-              }
-              description {
-                languageCode
-                languageText
-              }
               representedVariable {
                 id
                 name {

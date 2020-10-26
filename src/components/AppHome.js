@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import useAxios from 'axios-hooks'
-import { Button, Divider, Dropdown, Grid, Input, Loader } from 'semantic-ui-react'
+import { Divider, Dropdown, Grid, Input, Loader } from 'semantic-ui-react'
 import { ErrorMessage } from '@statisticsnorway/dapla-js-utilities'
 
 import LineageView from './LineageView'
 import { API, MODEL } from '../configurations'
 import { UI } from '../enums'
+
+const options = MODEL.VARIABLE_TYPES.map(type => ({ key: type, text: type, value: type }))
+  .concat([{ key: 'dataset', text: 'dataset', value: 'dataset' }])
 
 function AppHome ({ restApi, language }) {
   const [apiReady, setApiReady] = useState(false)
@@ -16,8 +19,6 @@ function AppHome ({ restApi, language }) {
 
   useEffect(() => {
     if (!loading && !error) {
-      setApiReady(true)
-
       const queryString = window.location.search
       const urlParams = new URLSearchParams(queryString)
       const id = urlParams.get('id')
@@ -27,6 +28,8 @@ function AppHome ({ restApi, language }) {
         setDataId(id)
         setDataType(type)
       }
+
+      setApiReady(true)
     } else {
       setApiReady(false)
     }
@@ -34,6 +37,11 @@ function AppHome ({ restApi, language }) {
 
   return (
     <>
+      {loading ? <Loader active inline='centered' /> :
+        error ? <ErrorMessage error={UI.API_ERROR_MESSAGE[language]} language={language} /> :
+          apiReady && <LineageView dataId={dataId} dataType={dataType} language={language} />
+      }
+      <Divider hidden />
       <Grid>
         <Grid.Column width={3}>
           <Input
@@ -51,7 +59,7 @@ function AppHome ({ restApi, language }) {
           <Dropdown
             selection
             value={dataType}
-            options={MODEL.VARIABLE_TYPES.map(type => ({ key: type, text: type, value: type })).concat([{ key: 'dataset', text: 'dataset', value: 'dataset'}])}
+            options={options}
             onChange={(e, { value }) => {
               setApiReady(false)
               setDataType(value)
@@ -59,13 +67,6 @@ function AppHome ({ restApi, language }) {
           />
         </Grid.Column>
       </Grid>
-      <Divider hidden />
-      <Button primary content='Go' onClick={() => setApiReady(true)} />
-      {loading ? <Loader active inline='centered' /> :
-        error ? <ErrorMessage error={UI.API_ERROR_MESSAGE[language]} language={language} /> :
-          apiReady &&
-          <LineageView dataId={dataId} dataType={dataType} language={language} />
-      }
     </>
   )
 }

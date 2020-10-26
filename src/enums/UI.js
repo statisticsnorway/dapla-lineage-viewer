@@ -7,5 +7,9 @@ export const UI = {
     en: 'Lineage Viewer',
     nb: 'Sporingsvisning'
   },
-  LEGEND: ['instanceVariable', '', 'representedVariable', 'dataset', 'variable']
+  LEGEND: ['variable', '', 'dataset', 'representedVariable', '', 'instanceVariable'],
+  LINEAGE_FOR: {
+    en: 'Lineage for',
+    nb: 'Sporing av'
+  }
 }
