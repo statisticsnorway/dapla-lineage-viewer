@@ -15,7 +15,7 @@ export const SETTINGS = {
     en: 'Settings',
     nb: 'Innstillinger'
   },
-  RESET_SETTINGS: {
+  RESET_VALUES: {
     en: 'Reset to default values',
     nb: 'Tilbakestill til standardverdier'
   }
