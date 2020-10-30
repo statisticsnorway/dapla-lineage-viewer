@@ -13,7 +13,7 @@ import { ApiContext, LanguageContext } from '../context/AppContext'
 import { API } from '../configurations'
 import { SETTINGS, TEST_IDS } from '../enums'
 
-function AppSettings ({ error, loading, open, setSettingsOpen }) {
+function AppSettings ({ error, loading, open, setOpen }) {
   const { language } = useContext(LanguageContext)
   const { restApi, setRestApi, graphqlApi, setGraphqlApi } = useContext(ApiContext)
 
@@ -40,7 +40,7 @@ function AppSettings ({ error, loading, open, setSettingsOpen }) {
   }
 
   return (
-    <Modal open={open} onClose={() => setSettingsOpen(false)} style={SSB_STYLE}>
+    <Modal open={open} onClose={() => setOpen(false)} style={SSB_STYLE}>
       <Header size='large' style={SSB_STYLE}>
         <Icon name='cog' style={{ color: SSB_COLORS.GREEN }} />
         {SETTINGS.HEADER[language]}
@@ -78,7 +78,7 @@ function AppSettings ({ error, loading, open, setSettingsOpen }) {
             <Grid.Column textAlign='right'>
               <InfoPopup
                 position='left center'
-                text={SETTINGS.RESET_SETTINGS[language]}
+                text={SETTINGS.RESET_VALUES[language]}
                 trigger={
                   <Icon
                     link
@@ -87,7 +87,7 @@ function AppSettings ({ error, loading, open, setSettingsOpen }) {
                     size='large'
                     onClick={() => setDefaults()}
                     style={{ color: SSB_COLORS.BLUE }}
-                    data-testid={TEST_IDS.DEFAULT_SETTINGS_BUTTON}
+                    data-testid={TEST_IDS.DEFAULT_SETTINGS_VALUES_BUTTON}
                   />
                 }
               />
@@ -95,13 +95,12 @@ function AppSettings ({ error, loading, open, setSettingsOpen }) {
           </Grid>
         </Container>
       </Modal.Content>
-      <Segment basic>
-        <SimpleFooter
-          language={language}
-          appVersion={process.env.REACT_APP_VERSION}
-          sourceUrl={process.env.REACT_APP_SOURCE_URL}
-        />
-      </Segment>
+      <SimpleFooter
+        language={language}
+        showScrollToTop={false}
+        appVersion={process.env.REACT_APP_VERSION}
+        sourceUrl={process.env.REACT_APP_SOURCE_URL}
+      />
     </Modal>
   )
 }

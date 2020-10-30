@@ -11,6 +11,7 @@ export const TEST_CONFIGURATIONS = {
     setRestApi: fn,
     setGraphqlApi: fn2
   }),
+  errorString: errorString,
   errorObject: { response: { data: errorString } },
   language: LANGUAGE.LANGUAGES.NORWEGIAN.languageCode,
   otherLanguage: LANGUAGE.LANGUAGES.ENGLISH.languageCode
