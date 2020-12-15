@@ -3,6 +3,7 @@
 /src
 /public
 /.idea
+.eslintcache
 .DS_Store
 azure-pipelines.yml
 babel.config.js
