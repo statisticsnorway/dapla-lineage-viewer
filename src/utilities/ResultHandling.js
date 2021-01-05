@@ -119,7 +119,6 @@ export const nodeGraphFromDataset = (id, data, language) => data.reduce((acc, cu
               nodeLabelName: getLocalizedGsimObjectText(language, dataset[GSIM.NAME]),
               nodeLabelDescription: getLocalizedGsimObjectText(language, dataset[GSIM.DESCRIPTION])
             })
-          } else {
           }
 
           lineage.links.push(({
@@ -142,7 +141,7 @@ export const nodeGraphFromVariable = (id, data, type, language) => data.reduce((
       lineageField.forEach(smart => {
         const smartSmart = getNestedObject(smart, MODEL.SMART)
         let documentedInDataset = false
-        let documentedInDatasetId = false
+        let documentedInDatasetId
 
         if (smart.hasOwnProperty('smartGraph') && smart.smartGraph.length === 1) {
           documentedInDatasetId = smart.smartGraph[0].fromId
@@ -233,18 +232,18 @@ export const nodeGraphFromVariable = (id, data, type, language) => data.reduce((
         lineage.links.push({ source: rv.id, target: id })
 
         if (rv.hasOwnProperty(GSIM.VARIABLE)) {
-          const rv_v = rv[GSIM.VARIABLE]
+          const rvV = rv[GSIM.VARIABLE]
 
           lineage.nodes.push({
             size: 600,
-            id: rv_v.id,
-            color: hash.hex(rv_v.id),
+            id: rvV.id,
+            color: hash.hex(rvV.id),
             symbolType: variableSymbols.variable,
-            nodeLabelName: getLocalizedGsimObjectText(language, rv_v[GSIM.NAME]),
-            nodeLabelDescription: getLocalizedGsimObjectText(language, rv_v[GSIM.DESCRIPTION])
+            nodeLabelName: getLocalizedGsimObjectText(language, rvV[GSIM.NAME]),
+            nodeLabelDescription: getLocalizedGsimObjectText(language, rvV[GSIM.DESCRIPTION])
           })
 
-          lineage.links.push({ source: rv_v.id, target: rv.id })
+          lineage.links.push({ source: rvV.id, target: rv.id })
         }
       }
 
@@ -256,18 +255,18 @@ export const nodeGraphFromVariable = (id, data, type, language) => data.reduce((
       setLfr(lineageFieldsRepresented, id)
 
       if (cur[type].hasOwnProperty(GSIM.VARIABLE)) {
-        const rv_v = cur[type][GSIM.VARIABLE]
+        const rvV = cur[type][GSIM.VARIABLE]
 
         lineage.nodes.push({
           size: 600,
-          id: rv_v.id,
-          color: hash.hex(rv_v.id),
+          id: rvV.id,
+          color: hash.hex(rvV.id),
           symbolType: variableSymbols.variable,
-          nodeLabelName: getLocalizedGsimObjectText(language, rv_v[GSIM.NAME]),
-          nodeLabelDescription: getLocalizedGsimObjectText(language, rv_v[GSIM.DESCRIPTION])
+          nodeLabelName: getLocalizedGsimObjectText(language, rvV[GSIM.NAME]),
+          nodeLabelDescription: getLocalizedGsimObjectText(language, rvV[GSIM.DESCRIPTION])
         })
 
-        lineage.links.push({ source: rv_v.id, target: id })
+        lineage.links.push({ source: rvV.id, target: id })
       }
 
       break
