@@ -5,16 +5,16 @@ import { LANGUAGE } from '@statisticsnorway/dapla-js-utilities'
 import { API } from '../configurations'
 
 export const ApiContext = React.createContext({
-  graphqlApi: `${window._env.REACT_APP_API}${API.GRAPHQL}`,
-  restApi: window._env.REACT_APP_API
+  graphqlApi: `${window.__ENV.REACT_APP_API}${API.GRAPHQL}`,
+  restApi: window.__ENV.REACT_APP_API
 })
 
 export const LanguageContext = React.createContext(LANGUAGE.LANGUAGES.NORWEGIAN.languageCode)
 
 export const AppContextProvider = (props) => {
-  const [restApi, setRestApi] = useState(window._env.REACT_APP_API)
+  const [restApi, setRestApi] = useState(window.__ENV.REACT_APP_API)
   const [language, setLanguage] = useState(LANGUAGE.LANGUAGES.NORWEGIAN.languageCode)
-  const [graphqlApi, setGraphqlApi] = useState(`${window._env.REACT_APP_API}${API.GRAPHQL}`)
+  const [graphqlApi, setGraphqlApi] = useState(`${window.__ENV.REACT_APP_API}${API.GRAPHQL}`)
 
   const graphqlClient = new GraphQLClient({ url: `${graphqlApi}` })
 

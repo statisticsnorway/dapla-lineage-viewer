@@ -11,5 +11,5 @@
 .eslintcache
 .DS_Store
 /.idea
-/public/env.js
+/public/__ENV.js
 *.tgz

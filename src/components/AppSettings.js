@@ -35,8 +35,8 @@ function AppSettings ({ error, loading, open, setOpen }) {
 
   const setDefaults = () => {
     setSettingsEdited(true)
-    setApiUrl(window._env.REACT_APP_API)
-    setGraphqlApiUrl(`${window._env.REACT_APP_API}${API.GRAPHQL}`)
+    setApiUrl(window.__ENV.REACT_APP_API)
+    setGraphqlApiUrl(`${window.__ENV.REACT_APP_API}${API.GRAPHQL}`)
   }
 
   return (

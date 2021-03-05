@@ -1,6 +1,6 @@
 {
   "name": "@statisticsnorway/dapla-lineage-viewer",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Lineage Viewer for Statistics Norway Dataplatform",
   "main": "lib/bundle.js",
   "repository": {
@@ -57,7 +57,7 @@
     "@babel/core": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
-    "@beam-australia/react-env": "^2.1.2",
+    "@beam-australia/react-env": "^3.0.8",
     "@rollup/plugin-babel": "^5.1.0",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.1",

@@ -28,14 +28,14 @@ test('Loads', () => {
   useAxios.mockReturnValue([{ loading: true, error: undefined }])
   setup()
 
-  expect(useAxios).toHaveBeenCalledWith(`${window._env.REACT_APP_API}${API.GET_HEALTH}`, { useCache: false })
+  expect(useAxios).toHaveBeenCalledWith(`${window.__ENV.REACT_APP_API}${API.GET_HEALTH}`, { useCache: false })
 })
 
 test('Does not crash', () => {
   useAxios.mockReturnValue([{ loading: false, error: undefined }])
   setup()
 
-  expect(useAxios).toHaveBeenCalledWith(`${window._env.REACT_APP_API}${API.GET_HEALTH}`, { useCache: false })
+  expect(useAxios).toHaveBeenCalledWith(`${window.__ENV.REACT_APP_API}${API.GET_HEALTH}`, { useCache: false })
 })
 
 test('Renders error when backend call returns error', () => {
